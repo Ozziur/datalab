@@ -1,4 +1,4 @@
-from random import Random
+from random import Random, random
 from beverages import *
 
 class CoffeeMachine:
@@ -13,7 +13,7 @@ class CoffeeMachine:
 			super().__init__(args)
 	def serve(self, drink):
 		if self.usage > 10:
-			return self.BrokenMachineException()
+			raise self.BrokenMachineException()
 		else:
 			y = Random()
 			x = y.randint(0,1)
@@ -22,21 +22,31 @@ class CoffeeMachine:
 				return self.EmptyCup()
 			else:
 				self.usage+=1
-				return drink
+				return drink()
 	def repair(self):
 		self.usage = 0
 
 
 m=CoffeeMachine()
 i =0
-while i <=12:
+while i <=11:
 	i+=1
-	print(m.serve(Tea()), end="\n\n")
-
-m.repair()
+	try:
+		order=[Coffe,Tea,Chocolate,Cappuccino]
+		x=Random()
+		print(m.serve(order[x.randint(0,3)]), end="\n\n")
+	except m.BrokenMachineException as x:
+		print(x, end="\n\n")	 
+		m.repair()
 
 i = 0
 
-while i <=12:
+while i <=11:
 	i+=1
-	print(m.serve(Coffe()), end="\n\n")
+	try:
+		order=[Coffe,Tea,Chocolate,Cappuccino]
+		x=Random()
+		print(m.serve(order[x.randint(0,3)]), end="\n\n")
+	except m.BrokenMachineException as x:
+		print(x, end="\n\n")	 
+		m.repair()
