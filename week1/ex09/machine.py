@@ -12,12 +12,10 @@ class CoffeeMachine:
 		def __init__(self,args= "This coffee machine has to be repaired.") -> None:
 			super().__init__(args)
 	def serve(self, drink):
-		if self.usage > 10:
+		if self.usage >= 10:
 			raise self.BrokenMachineException()
 		else:
-			y = Random()
-			x = y.randint(0,1)
-			if x == 0:
+			if x.randint(0,1) == 0:
 				self.usage += 1
 				return self.EmptyCup()
 			else:
@@ -39,14 +37,4 @@ while i <=11:
 		print(x, end="\n\n")	 
 		m.repair()
 
-i = 0
 
-while i <=11:
-	i+=1
-	try:
-		order=[Coffe,Tea,Chocolate,Cappuccino]
-		x=Random()
-		print(m.serve(order[x.randint(0,3)]), end="\n\n")
-	except m.BrokenMachineException as x:
-		print(x, end="\n\n")	 
-		m.repair()
